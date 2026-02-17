@@ -2,6 +2,7 @@ package com.laedson.person_api.controller;
 
 import com.laedson.person_api.dto.request.MessageResponseDTO;
 import com.laedson.person_api.dto.request.PersonDTO;
+import com.laedson.person_api.exception.PersonNotFoundExeption;
 import com.laedson.person_api.service.PersonService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,10 @@ public class PersonController {
     @GetMapping
     public List<PersonDTO> listAll() {
         return personService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundExeption {
+        return personService.findById(id);
     }
 }
